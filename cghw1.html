@@ -1,0 +1,99 @@
+<html>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+attribute vec2 vPosition;
+attribute vec4 vColor;
+varying vec4 fColor;
+
+void main()
+{
+    gl_Position = vec4(vPosition, 0.0, 1.0);
+    fColor = vColor;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float;
+
+varying vec4 fColor;
+uniform vec4 uColor;
+uniform int uColorEnabled;
+
+void main()
+{
+    gl_FragColor = fColor;
+    if(uColorEnabled == 1) gl_FragColor = uColor;
+}
+</script>
+
+<script src="FileSaver.js"></script>
+<script type="text/javascript" src="webgl-utils.js"></script>
+<script type="text/javascript" src="initShaders.js"></script>
+<script type="text/javascript" src="MV.js"></script>
+<script type="text/javascript" src="cghw1.js"></script>
+
+<body>
+
+<div>
+<canvas id="gl-canvas" width="700" height="700"></canvas>
+<div>
+    <p style="font-weight: bold;">Click on the switches below to change a component's color. After switching on, generate the color using the RGB sliders. <br>
+
+    </div>   
+<div>
+    <label class="checkbox">
+        Line Color Change Switch:<input id="line-color-change-switch" value=false type="checkbox" >
+        <span class="slider round"></span>
+    </label>
+</div>
+<div>
+    <label class="switch">
+        Background Color Change Switch:<input id="background-color-change-switch" value=false type="checkbox" >
+        <span class="slider round"></span>
+    </label>
+</div>
+<div>
+    <label class="switch">
+        Polygon Color Change Switch:<input id="polygon-color-change-switch" value=false type="checkbox" >
+        <span class="slider round"></span>
+    </label>
+</div>
+
+</div>
+
+<div>
+    <p style="text-align:left;">
+        Red  0 <input id="r-slider" type="range" min="0" max="255" step="1" value="0" /> 255
+    </p>
+</div>
+<div>
+    <p style="text-align:left;">
+        Green  0 <input id="g-slider" type="range" min="0" max="255" step="1" value="0" /> 255
+    </p>
+</div>
+<div>
+    <p style="text-align:left;">
+        Blue  0 <input id="b-slider" type="range"min="0" max="255" step="1" value="0" />255
+    </p>
+</div>
+<div>
+    <form>
+        <p style="font-weight: bold;">Enter the number of iterations for koch curve rule to apply, then press the button below.</p>
+        <input type="text" id="iterations-input" name="fname"><br> 
+    </form>
+<button id = "Button1">Koch Curve Transform!</button> 
+</div>
+<div>
+    <form>
+<p style="font-weight: bold;">Click on the save button to generate a txt file of your work. <br>
+    <button id = "Button2">Save</button>
+
+</form>
+</div>
+<div>
+    <p style="font-weight: bold;">Upload a txt file of a previous curve. <br>
+    <input type="file" id="txt-input">
+</div>
+</body>
+</html>
